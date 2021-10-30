@@ -1,0 +1,150 @@
+
+ #------------------------------------------------------------------------------------------------------------------------#
+ #                 _________  _____  ____
+ #  |      |    /\     |     |      |    \        Plugin by: Vilmu
+ #  |  /\  |   /  \    |     |____  |____/        Other contributors: 
+ #  | /  \ |  / -- \   |     |      |    \        
+ #  |/    \| /      \  |     |_____ |     \       Version: 0.0.1
+ #                     ____    ____               Documentation: 
+ #  |      |    /\    |    \  /
+ #  |  /\  |   /  \   |____/  \____
+ #  | /  \ |  / -- \  |    \       \
+ #  |/    \| /      \ |     \ \____/
+ #
+ #
+ #------------------------------------------------------------------------------------------------------------------------#
+ 
+
+# ARENA CONFIGURATION
+ 
+arena:
+#ARENA CENTER
+# The center of the arena. Define this with command /ww center. It must be the same in all the arenas
+ arenaCenter: 
+   - x: 0
+     y: 0
+     z: 0
+ arenaSize: 0 # How far from the center will the border be set at NOTE: Actual size of the arena from end to end will be twice the size of this (Setting this to less than 1 will default to 300)
+ minPlayers: 2
+ maxPlayers: 24
+ # MAX QUEUE TIME
+ # Maximum waiting time before starting the game with how ever many players are currently queued (In seconds)
+ # (Atleast the amount of minPlayers will have to be queued before this starts ticking)
+ # Setting this to 0 or a negative value, the plugin will use the default value of 300 seconds (5 minutes)
+ maxQueueTime: 0
+ # HOTZONE
+ # An area where rare and epic chests can generate on. This number is a divider, NOT the radius of a circle. It divides the arena size to create the circle where rare and epic chests can generate
+ # Leave to 1 or 0 to not perform divisions (The circle where reare and epic chests can generate will have the same radius as the arena size)
+ hotzone: 2 
+ # TIME BEFORE DROWNING
+ # Time it takes players to start slowly drowning (in whole minutes)
+ # 0 defaults to 20 minutes
+ timeBeforeDrowning: 0
+ # DROWNING SPEED
+ # How quickly players drown. (in whole minutes)
+ # IMPORTANT: Unit is the time it takes for the drowning damage to increase by 1
+ # 0 defaults to 2 minutes (Which means that at 2 minute after starting players take 1 damage per second)
+ drowningSpeed: 0
+ # EXPONENTIAL DROWNING
+ # At what point will drowning start to increase exponentially after drowning has started. (in whole minutes)
+ # 0 defaults to 5 minutes (Which means that at 5 minute after starting drowning damage begins to rise exponentially)
+ exponentialDrowning: 0
+  # TIME BEFORE DROWNED
+ # Time it takes before drowned to spawn (in whole minutes)
+ # 0 defaults to 10 minutes
+ timeBeforeDrowned: 0
+ # DROWNED HOT ZONE
+ # 0 Defaults to 1
+ drownedHotzone: 0
+ # DROWNED COUNT
+ # Amount of drowned to spawn every 10 seconds in a random location within 1/drownedHotZone from arena center to world border
+ # 0 defaults to 3
+ drownedCount: 0
+ # TIME BEFORE BORDER SHRINK
+ # 0 defaults to 15 minutes
+ timeBeforeBorder: 0 
+ # TIME DURING WHICH BORDER SHRINK
+ # 0 defaults to 10 minutes
+ timeToShrink: 0
+  # MINIMUM BORDER SIZE AFTER SHRINKING
+ # 0 defaults to 50 blocks
+ minBorder: 0
+ # If you do not use waterwars plugins built-in function to create worlds and instead use something like Multiverse you shall not be using namings that follow the pattern "waterwars_0", "waterwars_1" etc.
+ arenaNames: []
+ 
+# QUEUE CONFIGURATION
+
+queue: 
+ queuedOnJoin: false # If player should be queued to a game when joining the server or after interacting with queue item in lobby. True if queued on join as name suggests
+ queueItem: ENCHANTED_GOLDEN_APPLE
+ 
+ 
+# LOOT CONFIGURATION
+  
+loot:
+ containers: 
+ # Specify here container types used in the map for giving player loot. All other container types will be locked
+ # Do not use the same container for food and loot
+  loot: CHEST 
+  food: BARREL
+   
+ tiers: 
+  
+ # List of items to generate in the random tier chest. Number after the item is used to define 
+ # the probability of that item appearing in the generated chest
+ # When generating food, if type of food is decided to be generated, that food will be generated in random quantity of 1-6.
+ 
+  common: 
+   - STONE_AXE: 100
+   - LEATHER_BOOTS: 40
+   - LEATHER_HELMET: 40
+   - LEATHER_LEGGINGS: 30
+   - LEATHER_CHESTPLATE: 20
+  
+  rare: 
+   - IRON_AXE: 90
+   - IRON_BOOTS: 50
+   - IRON_HELMET: 30
+   - IRON_LEGGINGS: 20
+   - IRON_CHESTPLATE: 20
+    
+  epic: 
+   - TRIDENT: 70
+   - DIAMOND_AXE: 100
+   - DIAMOND_BOOTS: 50
+   - DIAMOND_HELMET: 50
+   - DIAMOND_LEGGINGS: 30
+   - DIAMOND_CHESTPLATE: 20
+       
+  food:
+   - COOKED_BEEF: 30
+   - COOKED_PORKCHOP: 30
+   - COOKED_CHICKEN: 50
+   - COOKED_COD: 60
+   - COOKED_SALMON: 60
+   - GOLDEN_APPLE: 10
+    
+ lootWeights: 
+ # A weight value for generating the random container tier 
+ # Generation will be also affected based on how close the container is 
+ # to the center of the map. Closer to the center means higher chance of rare and epic
+ # These values should add up to 100. 
+ # If the value goes over 100 the epic and rare weights will be 
+ # reduced until total is 100 
+ # if the value of epic or rare is zero it doesn't mean that those chests wont spawn
+ 
+  - common: 70
+  - rare: 20
+  - epic: 10
+  
+# LOCATION CONFIGURATION
+
+locations:
+ # Spawnlocations must be the same in every arena
+ spawnLocations:
+  -
+
+  
+ 
+   
+    

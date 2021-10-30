@@ -1,0 +1,36 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>me.vilmu.waterwars</groupId>
+  <artifactId>WaterWars</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>WaterWars</name>
+  <description>WaterWars plugin for Bukkit/Spigot</description>
+  
+  <build>
+	  	<defaultGoal>install</defaultGoal>
+	  	<sourceDirectory>src/main/java</sourceDirectory>
+	  	<resources>
+	  		<resource>
+  				<targetPath>.</targetPath>
+  				<filtering>true</filtering>
+  				<directory>${basedir}/src/main/resources/</directory>
+	  			<includes>
+  					<include>plugin.yml</include>
+  					<include>config.yml</include>
+  				</includes>
+	  			</resource>
+  		</resources>
+  	
+  		<plugins>
+  			<plugin>
+  				<artifactId>maven-jar-plugin</artifactId>
+  				<version>2.4</version>
+  				<configuration>
+  					<outputDirectory>D:\samuk\Tiedostot\MS\WaterWars\build</outputDirectory>
+  					<source>1.8</source>
+  					<target>1.8</target>
+  				</configuration>
+  			</plugin>
+  		</plugins>
+  	</build>
+</project>
