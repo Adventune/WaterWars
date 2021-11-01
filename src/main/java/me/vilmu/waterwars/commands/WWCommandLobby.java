@@ -2,6 +2,7 @@ package me.vilmu.waterwars.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -34,7 +35,9 @@ public class WWCommandLobby {
 			}
 			
 			PlayerMessages.whoosh(p);
-			p.teleport(Bukkit.getServer().getWorld("world").getSpawnLocation());
+			Location loc = Bukkit.getServer().getWorld("world").getSpawnLocation();
+			loc.add(0.5, 0, 0.5);
+			p.teleport(loc);
 			p.setGameMode(GameMode.SURVIVAL);
 			p.setFoodLevel(20);
 			p.setHealth(20);
