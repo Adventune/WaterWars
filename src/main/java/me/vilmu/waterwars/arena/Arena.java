@@ -192,7 +192,7 @@ public class Arena {
 				for(Player p : getPlayers()) {
 					PlayerMessages.borderShrinking(p);
 				}
-				world.getWorldBorder().setSize(minBorder, timeToShrink*60);
+				world.getWorldBorder().setSize(minBorder*2, timeToShrink*60);
 			}
 			
 		}, Storage.getTimeBeforeBorder() *60*20L);

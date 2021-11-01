@@ -28,7 +28,7 @@ public class WWCommandReload {
 		if(sender instanceof Player) PlayerMessages.saving((Player) sender);
 			WaterWars.console("Saving and syncing configuration...");
 			
-			FileConfiguration config = WaterWars.LoadConfig();
+			FileConfiguration config = WaterWars.GetConfig();
 			
 			WaterWars.console("Saving all configuration data that has been modified in-game");
 			for(int i : WaterWars.modifiedAttributes) {

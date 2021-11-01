@@ -82,10 +82,13 @@ public class WaterWars extends JavaPlugin {
 			}
 			
 			// Save all configuration data
-						
+
 			console("Loading configuration data...");		
 			
 			FileConfiguration config = LoadConfig();
+			
+			console("Checking if default configuration has been updated and inserting updated values!");
+			SaveConfig();
 			
 			//Common --------------------------------------------------------------------------------------------------------------
 			
@@ -381,9 +384,6 @@ public class WaterWars extends JavaPlugin {
 			
 			
 			console("Configuration information has now been retrieved and automatically modified if that was needed!");
-			console("Modifications to configuration will be listed in error messages");
-			console("All modifications made in-game (with commands or container tool etc.) will be saved on disable");
-			console("Any unsaved data will be lost if plugin does not get a chance to disable properly");
 			
 			console("Starting schedulers");
 			startScheduler();
@@ -440,7 +440,7 @@ public class WaterWars extends JavaPlugin {
 		
 		console("Disabling... ");
 		
-		FileConfiguration config = LoadConfig();
+		FileConfiguration config = GetConfig();
 		
 		console("Saving all configuration data that has been modified in-game");
 		for(int i : modifiedAttributes) {
@@ -522,6 +522,10 @@ public class WaterWars extends JavaPlugin {
 			cfgm = new ConfigManager();
 			cfgm.setup();
 			return cfgm.loadConfig();
+	}
+	
+	public static FileConfiguration GetConfig() {
+		return cfgm.loadConfig();
 	}
 	
 	public static void SaveConfig() {

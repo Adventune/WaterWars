@@ -24,8 +24,18 @@ arena:
    - x: 0
      y: 0
      z: 0
- arenaSize: 0 # How far from the center will the border be set at NOTE: Actual size of the arena from end to end will be twice the size of this (Setting this to less than 1 will default to 300)
+ # ARENA SIZE
+ # How far from the center will the border be set at 
+ # NOTE: Actual size of the arena from end-to-end will be twice the size of this (Setting this to less than 1 will default to 300)
+ arenaSize: 0 
+ # MINUMUM PLAYER COUNT
+ # The minimum amount of players that is needed for a match to start
+ # MUST be > 0
  minPlayers: 2
+ # MAXIMUM PLAYER COUNT
+ # The maximum amount of players that can be joined in one match
+ # There must be atleast the same amount of spawning locations in the map than the maximum player count is
+ # When maximum players have joined the queue, a new game is started imidiately
  maxPlayers: 24
  # MAX QUEUE TIME
  # Maximum waiting time before starting the game with how ever many players are currently queued (In seconds)
@@ -49,7 +59,7 @@ arena:
  # At what point will drowning start to increase exponentially after drowning has started. (in whole minutes)
  # 0 defaults to 5 minutes (Which means that at 5 minute after starting drowning damage begins to rise exponentially)
  exponentialDrowning: 0
-  # TIME BEFORE DROWNED
+ # TIME BEFORE DROWNED
  # Time it takes before drowned to spawn (in whole minutes)
  # 0 defaults to 10 minutes
  timeBeforeDrowned: 0
@@ -66,7 +76,8 @@ arena:
  # TIME DURING WHICH BORDER SHRINK
  # 0 defaults to 10 minutes
  timeToShrink: 0
-  # MINIMUM BORDER SIZE AFTER SHRINKING
+ # MINIMUM BORDER SIZE AFTER SHRINKING
+ # NOTE: Just as the arenaSize this is from the center meaning that the actual arena size from end-to-end is twice of this;
  # 0 defaults to 50 blocks
  minBorder: 0
  # If you do not use waterwars plugins built-in function to create worlds and instead use something like Multiverse you shall not be using namings that follow the pattern "waterwars_0", "waterwars_1" etc.
@@ -83,7 +94,7 @@ queue:
   
 loot:
  containers: 
- # Specify here container types used in the map for giving player loot. All other container types will be locked
+ # Specify here container types used in the map for giving player loot
  # Do not use the same container for food and loot
   loot: CHEST 
   food: BARREL

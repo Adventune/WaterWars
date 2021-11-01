@@ -3,8 +3,6 @@ package me.vilmu.waterwars.particles;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 
-import java.util.List;
-
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.Player;
