@@ -20,6 +20,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 
+import me.vilmu.waterwars.utilities.ConfigManager;
 import me.vilmu.waterwars.arena.ArenaUtilities;
 import me.vilmu.waterwars.commands.WWCommand;
 import me.vilmu.waterwars.events.handlers.PlayerStopSpectatingEventHandler;
@@ -32,7 +33,6 @@ import me.vilmu.waterwars.events.listeners.JoinMethods;
 import me.vilmu.waterwars.events.listeners.MoveListener;
 import me.vilmu.waterwars.events.listeners.QuitListener;
 import me.vilmu.waterwars.events.listeners.StopSpectateListener;
-import me.vilmu.waterwars.utilities.ConfigManager;
 import me.vilmu.waterwars.utilities.Ranks;
 
 
@@ -543,7 +543,7 @@ public class WaterWars extends JavaPlugin {
 		
 	}
 	
-	public static FileConfiguration LoadConfig() {
+	private static FileConfiguration LoadConfig() {
 			cfgm = new ConfigManager();
 			cfgm.setup();
 			return cfgm.loadConfig();

@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -29,7 +28,7 @@ public class ConfigManager {
 		if (!configfile.exists()) {
 			try {
 				configfile.createNewFile();
-				WaterWars.progressConsole(ChatColor.AQUA + "The config.yml file has been created");
+				WaterWars.progressConsole("The config.yml file has been created");
 			} catch (IOException e) {
 				WaterWars.errorConsole("Could not create the config.yml file");
 			}

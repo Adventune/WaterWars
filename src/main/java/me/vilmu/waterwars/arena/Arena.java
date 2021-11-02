@@ -97,6 +97,12 @@ public class Arena {
 
 	public void stop() {
 		stopped = true;
+		scheduler.cancelTask(border);
+		scheduler.cancelTask(borderDone);
+		scheduler.cancelTask(drownedDelay);
+		scheduler.cancelTask(drownedTask);
+		scheduler.cancelTask(drowningDelay);
+		scheduler.cancelTask(drowningTask);
 	}
 	
 	float drowningMultiplier = 0;
@@ -116,8 +122,13 @@ public class Arena {
 	int minBorder = Storage.getMinBorder();
 	Random rand = new Random();
 	
+	int drowningDelay;
+	int drownedDelay;
+	int border;
+	int borderDone;
+	
 	public void startSchedulers() {
-		scheduler.scheduleSyncDelayedTask(instance, new Runnable(){
+		drowningDelay = scheduler.scheduleSyncDelayedTask(instance, new Runnable(){
 
 			@Override
 			public void run() {
@@ -147,7 +158,7 @@ public class Arena {
 			
 		}, Storage.getTimeBeforeDrowning() *60*20L);
 		
-		scheduler.scheduleSyncDelayedTask(instance, new Runnable(){
+		drownedDelay = scheduler.scheduleSyncDelayedTask(instance, new Runnable(){
 
 			@Override
 			public void run() {
@@ -184,7 +195,7 @@ public class Arena {
 			
 		}, timeBeforeDrowned *60*20L);
 		
-		scheduler.scheduleSyncDelayedTask(instance, new Runnable(){
+		border = scheduler.scheduleSyncDelayedTask(instance, new Runnable(){
 
 			@Override
 			public void run() {
@@ -197,7 +208,7 @@ public class Arena {
 			
 		}, Storage.getTimeBeforeBorder() *60*20L);
 		
-		scheduler.scheduleSyncDelayedTask(instance, new Runnable(){
+		borderDone = scheduler.scheduleSyncDelayedTask(instance, new Runnable(){
 
 			@Override
 			public void run() {
