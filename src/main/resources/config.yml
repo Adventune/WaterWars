@@ -28,9 +28,9 @@ arena:
 #ARENA CENTER
 # The center of the arena. Define this with command /ww center. It must be the same in all the arenas
  arenaCenter: 
-   - x: 0
-     y: 0
-     z: 0
+  x: 0
+  y: 0
+  z: 0
 # ARENA SIZE
 # How far from the center will the border be set at 
 # NOTE: Actual size of the arena from end-to-end will be twice the size of this (Setting this to less than 1 will default to 300)

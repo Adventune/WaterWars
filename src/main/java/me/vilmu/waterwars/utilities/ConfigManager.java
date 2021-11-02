@@ -38,10 +38,14 @@ public class ConfigManager {
 	}
 
 	public FileConfiguration loadConfig() {
+		configfile = new File(plugin.getDataFolder(), "config.yml");
+		cfg = YamlConfiguration.loadConfiguration(configfile);
 		return cfg;
 	}
 
-	public void saveConfig() {
+	public void saveConfig(FileConfiguration config) {
+		
+		cfg = config;
 		if(!configfile.exists()) {
 			WaterWars.errorConsole("The config.yml file does not exist! If you have moved it, please return it to its original folder. Else please restart the server to regenerate the default config.yml file!");
 			return;

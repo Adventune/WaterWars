@@ -92,7 +92,7 @@ public class WaterWars extends JavaPlugin {
 			FileConfiguration config = LoadConfig();
 			
 			console("Checking if default configuration has been updated and inserting updated values!");
-			SaveConfig();
+			SaveConfig(config);
 			
 
 			progressConsole("Connecting Ranks");
@@ -189,14 +189,14 @@ public class WaterWars extends JavaPlugin {
 			if(lootCont == null) {
 				errorConsole("Material specified for loot containers is not valid! Defaulting to CHEST");
 				config.set("loot.containers.loot", "CHEST");
-				SaveConfig();
+				SaveConfig(config);
 				lootCont = Material.CHEST;
 			}
 			
 			if(foodCont == null) {
 				errorConsole("Material specified for food containers is not valid! Defaulting to BARREL");
 				config.set("loot.containers.food", "BARREL");
-				SaveConfig();
+				SaveConfig(config);
 				foodCont = Material.BARREL;
 			}
 			
@@ -205,7 +205,7 @@ public class WaterWars extends JavaPlugin {
 				
 				config.set("loot.containers.loot", "CHEST");
 				config.set("loot.containers.food", "BARREL");
-				SaveConfig();
+				SaveConfig(config);
 				
 				lootCont = Material.CHEST;
 				foodCont = Material.BARREL;
@@ -220,10 +220,14 @@ public class WaterWars extends JavaPlugin {
 			// Map center --------------------------------------------------------------------------------------------------------------
 		
 			progressConsole("Retrieving arena center");
-			
-			Map<String, Integer> center = new HashMap<String, Integer>();
-			center = (HashMap<String, Integer>) config.getList("arena.arenaCenter").get(0);
-			Location loc = new Location(Bukkit.getWorld("waterwars"), center.get("x"), center.get("y"), center.get("z"));	
+
+			double x = 0;
+			double y = 0;
+			double z = 0;
+			x = config.getDouble("arena.arenaCenter.x");
+			y = config.getDouble("arena.arenaCenter.y");
+			z = config.getDouble("arena.arenaCenter.z");
+			Location loc = new Location(Bukkit.getWorld("waterwars"), x, y, z);	
 			Storage.setArenaCenter(loc);
 		
 			
@@ -353,7 +357,7 @@ public class WaterWars extends JavaPlugin {
 				errorConsole("Material specified for queue item is not valid! Defaulting to ENCHANTED_GOLDEN_APPLE");
 				
 				config.set("queue.queueItem", "ENCHANTED_GOLDEN_APPLE");
-				SaveConfig();
+				SaveConfig(config);
 				
 				queueItem = Material.ENCHANTED_GOLDEN_APPLE;
 			}
@@ -504,13 +508,14 @@ public class WaterWars extends JavaPlugin {
 				break;
 				
 			case 11:
-				progressConsole("Saving map center");
+				WaterWars.progressConsole("Saving map center");
 				Location loc = Storage.getArenaCenter();
-				Map<String, Integer> center = new HashMap<String, Integer>();
-				center.put("x", loc.getBlockX());
-				center.put("y", loc.getBlockY());
-				center.put("z", loc.getBlockZ());
-				config.set("arena.arenaCenter", center);
+				double x = loc.getX();
+				double y = loc.getY();
+				double z = loc.getZ();
+				config.set("arena.arenaCenter.x", x);
+				config.set("arena.arenaCenter.y", y);
+				config.set("arena.arenaCenter.z", z);
 				break;
 				
 			case 12:
@@ -529,8 +534,8 @@ public class WaterWars extends JavaPlugin {
 				config.set("locations.spawnLocations", maps2);
 				break;
 			}
-			SaveConfig();
 		}
+		SaveConfig(config);
 		
 		Ranks.disconnect();
 		
@@ -553,7 +558,7 @@ public class WaterWars extends JavaPlugin {
 		return cfgm.loadConfig();
 	}
 	
-	public static void SaveConfig() {
-		cfgm.saveConfig();
+	public static void SaveConfig(FileConfiguration config) {
+		cfgm.saveConfig(config);
 	}
 }
