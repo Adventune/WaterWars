@@ -5,33 +5,29 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 
-public class MySQL {
+public class Ranks {
 	
 	public static Connection conn;
 	
 	static String host, port, database, username, password;
 	
 	
-	public static void connect() {
+	public static void connect() throws SQLException{
 		
 		
-		host = "localhost";
-		port = "3360";
-		database = null;
-		username = null;
-		password = null;
+		host = "172.18.0.1";
+		database = "multi-survivals";
+		port = "25596";
+		username = "multi-survivals";
+		password = "UK7tm7U72WXYVrpp";
 		
 		
 		
 		if(!isConnected()) {
-			try {
-				conn = DriverManager.getConnection("jdbc:mysql://"
-		                + host + ":" + port + "/" + database,
-		                username, password);
+			conn = DriverManager.getConnection("jdbc:mysql://"
+	                + host + ":" + port + "/" + database,
+	                username, password);
 				
-			} catch(SQLException e) {
-				e.printStackTrace();
-			}
 		}
 	}
 	

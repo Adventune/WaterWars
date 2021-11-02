@@ -1,6 +1,7 @@
 package me.vilmu.waterwars;
 
 import java.io.File;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +24,7 @@ import me.vilmu.waterwars.arena.ArenaUtilities;
 import me.vilmu.waterwars.commands.WWCommand;
 import me.vilmu.waterwars.events.handlers.PlayerStopSpectatingEventHandler;
 import me.vilmu.waterwars.events.listeners.ArenaStartEventListener;
+import me.vilmu.waterwars.events.listeners.ChatMessageListener;
 import me.vilmu.waterwars.events.listeners.DamageListener;
 import me.vilmu.waterwars.events.listeners.DeathListener;
 import me.vilmu.waterwars.events.listeners.GameContainerListener;
@@ -31,6 +33,7 @@ import me.vilmu.waterwars.events.listeners.MoveListener;
 import me.vilmu.waterwars.events.listeners.QuitListener;
 import me.vilmu.waterwars.events.listeners.StopSpectateListener;
 import me.vilmu.waterwars.utilities.ConfigManager;
+import me.vilmu.waterwars.utilities.Ranks;
 
 
 public class WaterWars extends JavaPlugin {
@@ -59,6 +62,7 @@ public class WaterWars extends JavaPlugin {
 			Bukkit.getPluginManager().registerEvents(new DeathListener(), this);
 			Bukkit.getPluginManager().registerEvents(new ArenaStartEventListener(), this);
 			Bukkit.getPluginManager().registerEvents(new MoveListener(), this);
+			Bukkit.getPluginManager().registerEvents(new ChatMessageListener(), this);
 			
 		// Listener classes ------------------------------------------------------
 
@@ -89,6 +93,15 @@ public class WaterWars extends JavaPlugin {
 			
 			console("Checking if default configuration has been updated and inserting updated values!");
 			SaveConfig();
+			
+
+			console("Connecting Ranks...");
+			try {
+				Ranks.connect();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				getServer().getPluginManager().disablePlugin(this);
+			}
 			
 			//Common --------------------------------------------------------------------------------------------------------------
 			
@@ -508,6 +521,8 @@ public class WaterWars extends JavaPlugin {
 			}
 			SaveConfig();
 		}
+		
+		Ranks.disconnect();
 		
 		Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[WaterWars] Disabling successful");
     }

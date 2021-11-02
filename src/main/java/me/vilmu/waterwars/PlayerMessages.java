@@ -3,6 +3,7 @@ package me.vilmu.waterwars;
 import java.util.List;
 
 import org.bukkit.ChatColor;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 public class PlayerMessages {
@@ -101,5 +102,17 @@ public class PlayerMessages {
 	}
 	public static void borderHasShrunk(Player p) {
 		p.sendMessage(watermark + ChatColor.GOLD + "Border has now shrunk!");
+	}
+	public static void chatMessage(Player sender, List<Player> players, String msg, World w) {
+		for(Player p : players) {
+			p.sendMessage("<" + sender.getDisplayName()+"> " + msg);
+		}
+		WaterWars.sender.sendMessage(w.getName() + ": <" + sender.getDisplayName()+"> " + msg);
+	}
+	public static void rankMessage(String msg, List<Player> players, World w) {
+		for(Player p : players) {
+			p.sendMessage(msg);
+		}
+		WaterWars.sender.sendMessage(w.getName() + ": " + msg);
 	}
 }

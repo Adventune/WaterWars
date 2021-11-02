@@ -91,7 +91,7 @@ public class Arena {
 		return alivePlayers;
 	}
 
-	public boolean hasStoped() {
+	public boolean hasStopped() {
 		return stopped;
 	}
 
@@ -121,14 +121,14 @@ public class Arena {
 
 			@Override
 			public void run() {
-				if(hasStoped()) return;
+				if(hasStopped()) return;
 				for(Player p : getAlivePlayers()) {
 					PlayerMessages.drowningBegins(p);
 				}
 				drowningTask = scheduler.scheduleSyncRepeatingTask(instance, new Runnable() {
 					@Override
 					public void run() {
-						if(hasStoped()) scheduler.cancelTask(drowningTask);
+						if(hasStopped()) scheduler.cancelTask(drowningTask);
 						List<Player> ps = getAlivePlayers();
 						if(!(ps == null || ps.isEmpty())) {
 							for(Player p : ps) {
@@ -151,14 +151,14 @@ public class Arena {
 
 			@Override
 			public void run() {
-				if(hasStoped()) return;
+				if(hasStopped()) return;
 				for(Player p : getPlayers()) {
 					PlayerMessages.drownedBegins(p);
 				}
 				drownedTask = scheduler.scheduleSyncRepeatingTask(instance, new Runnable() {
 					@Override
 					public void run() {
-						if(hasStoped()) scheduler.cancelTask(drownedTask);
+						if(hasStopped()) scheduler.cancelTask(drownedTask);
 						else {
 							int max = (int) world.getWorldBorder().getSize() / drownedHotzone;
 							int x = rand.nextInt(max);
@@ -188,7 +188,7 @@ public class Arena {
 
 			@Override
 			public void run() {
-				if(hasStoped()) return;
+				if(hasStopped()) return;
 				for(Player p : getPlayers()) {
 					PlayerMessages.borderShrinking(p);
 				}
@@ -201,7 +201,7 @@ public class Arena {
 
 			@Override
 			public void run() {
-				if(hasStoped()) return;
+				if(hasStopped()) return;
 				for(Player p : getPlayers()) {
 					PlayerMessages.borderHasShrunk(p);
 				}

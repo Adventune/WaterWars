@@ -33,14 +33,5 @@
   			</plugin>
   		</plugins>
   	</build>
-  	
-  	<repositories>
-
-  	</repositories>
-  	
-  	<dependencies>
-
-  	</dependencies>
-
-  	
+ 
 </project>

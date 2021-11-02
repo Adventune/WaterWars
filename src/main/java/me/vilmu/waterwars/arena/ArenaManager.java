@@ -220,7 +220,7 @@ public class ArenaManager {
 				}
 			}
 			
-			if(arena.getAlivePlayers().size() <= 1 && !arena.hasStoped()) {
+			if(arena.getAlivePlayers().size() <= 1 && !arena.hasStopped()) {
 				stop(arena);
 			}
 		}

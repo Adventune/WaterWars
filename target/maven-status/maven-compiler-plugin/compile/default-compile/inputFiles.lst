@@ -1,10 +1,10 @@
 D:\samuk\Tiedostot\MS\WaterWars\src\main\java\me\vilmu\waterwars\events\events\PlayerStopSpectatingEvent.java
 D:\samuk\Tiedostot\MS\WaterWars\src\main\java\me\vilmu\waterwars\events\listeners\JoinMethods.java
-D:\samuk\Tiedostot\MS\WaterWars\src\main\java\me\vilmu\waterwars\utilities\MySQL.java
 D:\samuk\Tiedostot\MS\WaterWars\src\main\java\me\vilmu\waterwars\utilities\Serializer.java
 D:\samuk\Tiedostot\MS\WaterWars\src\main\java\me\vilmu\waterwars\utilities\ConfigUpdater.java
 D:\samuk\Tiedostot\MS\WaterWars\src\main\java\me\vilmu\waterwars\utilities\exceptions\SerializationException.java
 D:\samuk\Tiedostot\MS\WaterWars\src\main\java\me\vilmu\waterwars\PlayerMessages.java
+D:\samuk\Tiedostot\MS\WaterWars\src\main\java\me\vilmu\waterwars\utilities\Ranks.java
 D:\samuk\Tiedostot\MS\WaterWars\src\main\java\me\vilmu\waterwars\events\listeners\ArenaStartEventListener.java
 D:\samuk\Tiedostot\MS\WaterWars\src\main\java\me\vilmu\waterwars\events\listeners\DamageListener.java
 D:\samuk\Tiedostot\MS\WaterWars\src\main\java\me\vilmu\waterwars\arena\ArenaManager.java
@@ -19,6 +19,7 @@ D:\samuk\Tiedostot\MS\WaterWars\src\main\java\me\vilmu\waterwars\commands\WWComm
 D:\samuk\Tiedostot\MS\WaterWars\src\main\java\me\vilmu\waterwars\utilities\KeyBuilder.java
 D:\samuk\Tiedostot\MS\WaterWars\src\main\java\me\vilmu\waterwars\arena\QueueTimer.java
 D:\samuk\Tiedostot\MS\WaterWars\src\main\java\me\vilmu\waterwars\events\listeners\GameContainerListener.java
+D:\samuk\Tiedostot\MS\WaterWars\src\main\java\me\vilmu\waterwars\events\listeners\ChatMessageListener.java
 D:\samuk\Tiedostot\MS\WaterWars\src\main\java\me\vilmu\waterwars\commands\WWCommandReload.java
 D:\samuk\Tiedostot\MS\WaterWars\src\main\java\me\vilmu\waterwars\utilities\ConfigManager.java
 D:\samuk\Tiedostot\MS\WaterWars\src\main\java\me\vilmu\waterwars\events\listeners\DeathListener.java
