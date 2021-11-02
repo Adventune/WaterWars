@@ -15,6 +15,13 @@
  #------------------------------------------------------------------------------------------------------------------------#
  
 
+# LOBBY CONFIGURATION
+
+lobby:
+ # World name of lobby
+ # Empty defaults to "world"
+ world: world
+
 # ARENA CONFIGURATION
  
 arena:

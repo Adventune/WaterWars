@@ -8,6 +8,7 @@ import java.util.Map;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 
 public class Storage {
 
@@ -46,6 +47,7 @@ public class Storage {
 	private static int timeBeforeBorder;
 	private static int drownedHotzone;
 	private static int timeBeforeDrowned;
+	private static World world;
 
 
 	// Setters -------------------------------------------------------
@@ -169,6 +171,10 @@ public class Storage {
 	public static void setMinBorder(int i) {
 		minBorder = i;
 	}
+
+	public static void setLobby(World w) {
+		world = w;
+	}	
 	// Getters -------------------------------------------------------
 	
 	// Common loot
@@ -303,6 +309,10 @@ public class Storage {
 
 	public static int getMinBorder() {
 		return minBorder;
+	}
+	
+	public static World getLobby() {
+		return world;
 	}
 
 }

@@ -269,7 +269,7 @@ public class ArenaManager {
 				for(Player p : players) {
 					if(p.isOnline() && p.getWorld() == world) {
 						PlayerMessages.whoosh(p);
-						p.teleport(Bukkit.getServer().getWorld("world").getSpawnLocation());
+						p.teleport(Storage.getLobby().getSpawnLocation());
 						p.setGameMode(GameMode.SURVIVAL);
 						p.setFoodLevel(20);
 						p.setHealth(20);
@@ -287,7 +287,7 @@ public class ArenaManager {
 				}
 				if(winner.isOnline() && winner.getWorld() == world) {
 					PlayerMessages.whoosh(winner);
-					winner.teleport(Bukkit.getServer().getWorld("world").getSpawnLocation());
+					winner.teleport(Storage.getLobby().getSpawnLocation());
 					winner.setGameMode(GameMode.SURVIVAL);
 					winner.setFoodLevel(20);
 					winner.setHealth(20);

@@ -95,13 +95,23 @@ public class WaterWars extends JavaPlugin {
 			SaveConfig();
 			
 
-			console("Connecting Ranks...");
+			progressConsole("Connecting Ranks");
 			try {
 				Ranks.connect();
 			} catch (SQLException e) {
 				e.printStackTrace();
 				getServer().getPluginManager().disablePlugin(this);
 			}
+
+			progressConsole("Ranks connected!");
+			progressConsole("Retrieving and loading lobby world");
+			
+			String world = config.getString("lobby.world");
+			if(world == null ||world == "") {
+				world = "world";
+			}
+	        Bukkit.getServer().createWorld(new WorldCreator(world).environment(World.Environment.NORMAL).type(WorldType.FLAT));
+			Storage.setLobby(Bukkit.getWorld(world));
 			
 			//Common --------------------------------------------------------------------------------------------------------------
 			
@@ -230,7 +240,7 @@ public class WaterWars extends JavaPlugin {
 			progressConsole("Retrieving arena names");
 			List<String> arenaNames = config.getStringList("arena.arenaNames");
 			Storage.setArenaNames(arenaNames);
-			progressConsole("All arena names are: " + arenaNames.toString());
+			progressConsole("Arena names that have been found in config: " + arenaNames.toString());
 			
 			// Load arena maps --------------------------------------------------------------------------------------------------------------
 

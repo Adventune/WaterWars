@@ -28,5 +28,6 @@ public class QuitListener implements Listener{
 			ArenaManager.updateArena(a);
 		}
 		p.setGameMode(GameMode.SURVIVAL);
+		p.teleport(Storage.getLobby().getSpawnLocation());
 	}
 }

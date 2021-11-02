@@ -36,6 +36,7 @@ public class JoinMethods implements Listener{
 		
 		p.setHealth(20);
 		p.setFoodLevel(20);
+		p.teleport(Storage.getLobby().getSpawnLocation());
 		
 		if(bool) {
 			ArenaUtilities.queuePlayer(p);

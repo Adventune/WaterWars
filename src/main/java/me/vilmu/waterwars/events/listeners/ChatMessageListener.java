@@ -85,7 +85,6 @@ public class ChatMessageListener implements Listener{
 	@EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        player.performCommand("fixranks");
         this.createPlayer(player.getName(), player);
         Rankhandler(player.getName(), player);
     }
@@ -116,10 +115,8 @@ public class ChatMessageListener implements Listener{
             statement.setString(1, player.getName());
             ResultSet results = statement.executeQuery();
             if (!results.next()) {
-                Bukkit.getConsoleSender().sendMessage((Object)ChatColor.RED + "Player not founded");
                 return false;
             } else {
-                Bukkit.getConsoleSender().sendMessage((Object)ChatColor.DARK_GREEN + "Player founded");
                 return true;
             }
             
@@ -144,7 +141,6 @@ public class ChatMessageListener implements Listener{
                 insert.setString(2, "none");
                 insert.setInt(3, 0);
                 insert.executeUpdate();
-                Bukkit.getConsoleSender().sendMessage((Object)ChatColor.GREEN + "Pelaaja luotu");
             }
         }
         catch (SQLException e) {
