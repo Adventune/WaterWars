@@ -16,6 +16,7 @@ public class ConfigManager {
 	// Files & File Configs Here
 	public FileConfiguration cfg;
 	public File configfile;
+	boolean isSetup = false;
 	// --------------------------
 
 	public void setup() {
@@ -34,12 +35,15 @@ public class ConfigManager {
 			}
 		}
 
+		isSetup = true;
 		cfg = YamlConfiguration.loadConfiguration(configfile);
 	}
 
 	public FileConfiguration loadConfig() {
-		configfile = new File(plugin.getDataFolder(), "config.yml");
-		cfg = YamlConfiguration.loadConfiguration(configfile);
+		if(isSetup) {
+			configfile = new File(plugin.getDataFolder(), "config.yml");
+			cfg = YamlConfiguration.loadConfiguration(configfile);
+		}
 		return cfg;
 	}
 
