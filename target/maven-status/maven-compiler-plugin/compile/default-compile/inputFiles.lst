@@ -1,5 +1,6 @@
 D:\samuk\Tiedostot\MS\WaterWars\src\main\java\me\vilmu\waterwars\events\events\PlayerStopSpectatingEvent.java
 D:\samuk\Tiedostot\MS\WaterWars\src\main\java\me\vilmu\waterwars\events\listeners\JoinMethods.java
+D:\samuk\Tiedostot\MS\WaterWars\src\main\java\me\vilmu\waterwars\commands\WWCommandPrivateGame.java
 D:\samuk\Tiedostot\MS\WaterWars\src\main\java\me\vilmu\waterwars\utilities\Serializer.java
 D:\samuk\Tiedostot\MS\WaterWars\src\main\java\me\vilmu\waterwars\utilities\ConfigUpdater.java
 D:\samuk\Tiedostot\MS\WaterWars\src\main\java\me\vilmu\waterwars\utilities\exceptions\SerializationException.java
@@ -13,6 +14,7 @@ D:\samuk\Tiedostot\MS\WaterWars\src\main\java\me\vilmu\waterwars\events\events\A
 D:\samuk\Tiedostot\MS\WaterWars\src\main\java\me\vilmu\waterwars\commands\WWCommandNewArena.java
 D:\samuk\Tiedostot\MS\WaterWars\src\main\java\me\vilmu\waterwars\arena\ArenaUtilities.java
 D:\samuk\Tiedostot\MS\WaterWars\src\main\java\me\vilmu\waterwars\Listener.java
+D:\samuk\Tiedostot\MS\WaterWars\src\main\java\me\vilmu\waterwars\arena\PrivateGame.java
 D:\samuk\Tiedostot\MS\WaterWars\src\main\java\me\vilmu\waterwars\WaterWars.java
 D:\samuk\Tiedostot\MS\WaterWars\src\main\java\me\vilmu\waterwars\events\listeners\MoveListener.java
 D:\samuk\Tiedostot\MS\WaterWars\src\main\java\me\vilmu\waterwars\commands\WWCommandSpawnPoint.java

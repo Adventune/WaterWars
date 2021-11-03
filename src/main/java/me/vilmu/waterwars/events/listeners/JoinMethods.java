@@ -15,6 +15,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import me.vilmu.waterwars.PlayerMessages;
 import me.vilmu.waterwars.Storage;
 import me.vilmu.waterwars.arena.ArenaManager;
 import me.vilmu.waterwars.arena.ArenaUtilities;
@@ -41,9 +42,7 @@ public class JoinMethods implements Listener{
 		if(bool) {
 			ArenaUtilities.queuePlayer(p);
 		}
-		else {
-			inv.addItem(i);
-		}
+		inv.addItem(i);
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -115,6 +114,12 @@ public class JoinMethods implements Listener{
     	if(ArenaManager.queuedPlayers.contains(p)) {
     		ArenaUtilities.removePlayerFromQueue(p);
     		return;
+    	} else if (ArenaUtilities.getPrivateGameWith(p).isValid()) {
+    		if(ArenaUtilities.isPGOwner(p)) {
+    			PlayerMessages.cantUseAsPGOwner(p);
+    		} else {
+    			ArenaUtilities.removePlayerFromPrivateGame(p);
+    		}
     	}
     	
     	ArenaUtilities.queuePlayer(p);

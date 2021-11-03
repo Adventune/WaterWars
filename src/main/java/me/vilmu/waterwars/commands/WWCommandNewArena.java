@@ -52,6 +52,7 @@ public class WWCommandNewArena {
 					if(WaterWars.modifiedAttributes.contains(8)) return;
 					
 					WaterWars.modifiedAttributes.add(8);
+					PlayerMessages.createdNewArena(p, worldName);
 				}
 
 			}

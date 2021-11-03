@@ -31,6 +31,7 @@ public class ArenaManager {
 
 	public static List<Player> queuedPlayers = new ArrayList<Player>();
 	public static List<Arena> arenas = new ArrayList<Arena>();
+	public static List<PrivateGame> privateGames = new ArrayList<PrivateGame>();
 	static Random rand = new Random();
 	private static boolean aborted = false;
 	static BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
@@ -50,6 +51,22 @@ public class ArenaManager {
 			}
 		}, 5* 20L);
 	}
+	
+	public static void startNewGame(PrivateGame pg) {
+		int id = ArenaUtilities.getNextEmptyId();
+		privateGames.remove(pg);
+		if(!aborted) createNewArena(id, pg.getPlayers());
+		if(!aborted) teleportPlayersToArena(id);
+		if(!aborted) teleportPlayersToSpawn(id);
+		
+		scheduler.scheduleSyncDelayedTask(WaterWars.getInstance(), new Runnable() {
+			@Override
+			public void run() {
+				if(!aborted) countdown(id);
+				if(aborted) aborted = false;
+			}
+		}, 5* 20L);
+	}
 
 
 
@@ -58,6 +75,46 @@ public class ArenaManager {
 		
 		players = ArenaUtilities.getPlayersFromQueue();
 		queuedPlayers.removeAll(players);
+		for(Player p : players) {
+			PlayerMessages.gameStartingSoon(p);
+			Arena a = ArenaUtilities.getArenaWith(p);
+			if(a.isValid()) {
+				a.players.remove(p);
+			}
+		}
+		
+		World world = ArenaUtilities.createWorld(id);
+		if (world == null) {
+			abortNewGame("There appears to be no world names listed in configuration or all names listed have been confirmed faulty! "
+					+ "If worlds listed in configuration actually exist you should be contacting the developer of the plugin. Open an issue in the project github! "
+					+ "Worlds that have been named faulty will be removed from the config on disable!");
+			return;
+		}
+		world.setGameRule(GameRule.DO_MOB_SPAWNING, false);
+		world.getWorldBorder().setSize(2* Storage.getArenaSize());
+		world.getWorldBorder().setCenter(Storage.getArenaCenter());
+		world.setAutoSave(false);
+		
+		if(!queuedPlayers.isEmpty()) {
+			for(Player p : queuedPlayers) {
+				PlayerMessages.missedGame(p);
+			}
+		}
+		
+
+		
+		Map<String,Object> m  = new HashMap<String, Object>();
+		
+		m.put("id", id);
+		m.put("world", world);
+		m.put("players", players);
+		
+		Arena newArena = new Arena(m);
+		
+		arenas.add(newArena);
+	}
+	
+	public static void createNewArena(int id, List<Player> players){
 		for(Player p : players) {
 			PlayerMessages.gameStartingSoon(p);
 			Arena a = ArenaUtilities.getArenaWith(p);
@@ -225,6 +282,16 @@ public class ArenaManager {
 			}
 		}
 
+	}
+	
+	public static void updatePrivateGame(PrivateGame pg) {		
+		if(pg.isValid()) {
+			for(int i = 0; i < privateGames.size(); i++) {
+				if(privateGames.get(i).getJoinKey() == pg.getJoinKey()) {
+					privateGames.set(i, pg);
+				}
+			}
+		}
 	}
 
 

@@ -20,7 +20,16 @@ permissions:
   children:
    - waterwars.commands.admin
    - waterwars.commands.player
+   - waterwars.commands.privategame.*
+ 
+ waterwars.commands.player: true
+ 
+ waterwars.commands.privategame.*:
+  children:
+   - waterwars.commands.privategame.create
+   - waterwars.commands.privategame.join
    
+ waterwars.commands.privategame.join: true
    
    
      

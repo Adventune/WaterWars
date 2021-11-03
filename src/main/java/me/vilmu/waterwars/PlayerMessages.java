@@ -6,6 +6,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
+import me.vilmu.waterwars.arena.PrivateGame;
+
 public class PlayerMessages {
 		
 	static String watermark = ChatColor.ITALIC + "" + ChatColor.BOLD + "WaterWars > ";
@@ -114,5 +116,32 @@ public class PlayerMessages {
 			p.sendMessage(msg);
 		}
 		WaterWars.sender.sendMessage(w.getName() + ": " + msg);
+	}
+	public static void createdNewArena(Player p, String name) {
+		p.sendMessage(watermark + ChatColor.AQUA + "New arena world has been created with name: " + name +"!");
+	}
+	public static void privateGameNotValid(Player p) {
+		p.sendMessage(watermark + ChatColor.AQUA + "This private game does not exist!");
+	}
+	public static void joinedPrivateGame(Player p, Player p2) {
+		p.sendMessage(watermark + ChatColor.AQUA + "You have been added to a private game hosted by: " + p2.getName() +"!");
+		p.sendMessage(ChatColor.GRAY + "To leave right click the queue item!");
+	}
+	public static void cantUseAsPGOwner(Player p) {
+		p.sendMessage(watermark + ChatColor.AQUA + "You can't join public games when you are hosting a private game!");
+	}
+	public static void notHostingPrivateGame(Player p) {
+		p.sendMessage(watermark + ChatColor.AQUA + "You are not currently hosting a private game!");
+	}
+	public static void privateGameCancelled(PrivateGame pg) {
+		for(Player p : pg.getPlayers()) {
+			p.sendMessage(watermark + ChatColor.AQUA + "Private game has been cancelled!");
+		}
+	}
+	public static void privateGameCreated(Player p, String joinKey) {
+		p.sendMessage(watermark + ChatColor.AQUA + "You are now hosting a private game! Anyone can now join using this command: " + ChatColor.GOLD + "/ww privategame join " + joinKey);
+	}
+	public static void privateGameFull(Player p) {
+		p.sendMessage(watermark + ChatColor.AQUA + "Unfortunately this private game is already full! Try again a bit later!");
 	}
 }

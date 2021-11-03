@@ -33,6 +33,10 @@ public class WWCommand implements CommandExecutor {
 		List<String> lobbyAliases = new ArrayList<>();
 		lobbyAliases.add("lobby");
 		lobbyAliases.add("home");
+		
+		List<String> pgAliases = new ArrayList<>();
+		pgAliases.add("privategame");
+		pgAliases.add("pg");
 
 		if(sender.hasPermission("waterwars.commands.admin")) {
 			if(args.length != 0) {
@@ -48,6 +52,7 @@ public class WWCommand implements CommandExecutor {
 				if(saveAliases.contains(args[0].toLowerCase())) {
 					WWCommandReload.onCommand(sender, cmd, label, args);
 				}
+				return true;
 			}
 		}
 
@@ -57,10 +62,39 @@ public class WWCommand implements CommandExecutor {
 					WWCommandLobby.onCommand(sender, cmd, label, args);
 				}
 			}
+			return true;
 		}
-		else {
-			sender.sendMessage("You don't have permission!");
-		}
+		if(args.length != 0) {
+			if(pgAliases.contains(args[0].toLowerCase())) {
+				String s = args[1].toLowerCase();
+				if(s == "create") {
+					if(sender.hasPermission("waterwars.commands.privategame.create")) {
+						WWCommandPrivateGame.create(sender, cmd, s, args);
+					} else sender.sendMessage("You don't have permission!"); return true;
+					
+				}
+				else if(s == "start") {
+					if(sender.hasPermission("waterwars.commands.privategame.create")) {
+						WWCommandPrivateGame.start(sender, cmd, s, args);
+					} else sender.sendMessage("You don't have permission!"); return true;
+					
+				}
+				else if(s == "cancel") {
+					if(sender.hasPermission("waterwars.commands.privategame.create")) {
+						WWCommandPrivateGame.cancel(sender, cmd, s, args);
+					} else sender.sendMessage("You don't have permission!"); return true;
+					
+				}
+				else if(s == "join") {
+					if(sender.hasPermission("waterwars.commands.privategame.join")) {
+						WWCommandPrivateGame.join(sender, cmd, s, args);
+					} else sender.sendMessage("You don't have permission!"); return true;
+					
+				}
+			}
+		} else return true;
+		
+		sender.sendMessage("You don't have permission!");
 		return true;
 
 	}
