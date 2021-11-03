@@ -174,8 +174,8 @@ public class Arena {
 							int max = (int) world.getWorldBorder().getSize() / drownedHotzone;
 							int x = rand.nextInt(max);
 							int z = rand.nextInt(max);
-							if(rand.nextInt(2) -1 <=0) x*=-1;
-							if(rand.nextInt(2) -1 <=0) z*=-1;
+							if(rand.nextBoolean()) x*=-1;
+							if(rand.nextBoolean()) z*=-1;
 							
 							Location loc = new Location(world, x, world.getHighestBlockYAt(x, z)+1,z);
 							if(spawnTask != 0) scheduler.cancelTask(spawnTask);
@@ -218,7 +218,7 @@ public class Arena {
 				}
 			}
 			
-		}, timeToShrink + timeBeforeBorder *60*20L);
+		}, (timeToShrink + timeBeforeBorder) *60*20L);
 		
 		
 	}
