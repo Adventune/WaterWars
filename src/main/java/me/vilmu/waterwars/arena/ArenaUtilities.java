@@ -129,8 +129,12 @@ public class ArenaUtilities {
 			message = color + "Players in queue: " + playersInQueue + "/" + maxPlayers + " Game is now starting...";
 		}
 
-		for (Player p : ArenaManager.queuedPlayers) {
-			sendActionbar(p, message);
+		sendActionbar(ArenaManager.queuedPlayers, message);
+		
+		for(PrivateGame pg : ArenaManager.privateGames) {
+			List<Player> players = pg.getPlayers();
+			message = color + "Players in private game (" + pg.getJoinKey() + "): " + players.size() + "/" + maxPlayers;
+			sendActionbar(players, message);
 		}
 
 	}
