@@ -90,6 +90,10 @@ public class Arena {
 	public List<Player> getAlivePlayers() {
 		return alivePlayers;
 	}
+	
+	public void removePlayer(Player p) {
+		players.remove(p);
+	}
 
 	public boolean hasStopped() {
 		return stopped;

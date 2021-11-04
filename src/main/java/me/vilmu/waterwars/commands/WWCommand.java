@@ -42,17 +42,20 @@ public class WWCommand implements CommandExecutor {
 			if(args.length != 0) {
 				if(buildAliases.contains(args[0].toLowerCase())) {
 					WWCommandBuild.onCommand(sender, cmd, label, args);
+					return true;
 				}
 				if(spawnPointAliases.contains(args[0].toLowerCase())) {
 					WWCommandSpawnPoint.onCommand(sender, cmd, label, args);
+					return true;
 				}
 				if(newArenaAliases.contains(args[0].toLowerCase())) {
 					WWCommandNewArena.onCommand(sender, cmd, label, args);
+					return true;
 				}	
 				if(saveAliases.contains(args[0].toLowerCase())) {
 					WWCommandReload.onCommand(sender, cmd, label, args);
+					return true;
 				}
-				return true;
 			}
 		}
 
@@ -60,39 +63,10 @@ public class WWCommand implements CommandExecutor {
 			if(args.length != 0) {
 				if(lobbyAliases.contains(args[0].toLowerCase())) {
 					WWCommandLobby.onCommand(sender, cmd, label, args);
+					return true;
 				}
 			}
-			return true;
 		}
-		if(args.length != 0) {
-			if(pgAliases.contains(args[0].toLowerCase())) {
-				String s = args[1].toLowerCase();
-				if(s == "create") {
-					if(sender.hasPermission("waterwars.commands.privategame.create")) {
-						WWCommandPrivateGame.create(sender, cmd, s, args);
-					} else sender.sendMessage("You don't have permission!"); return true;
-					
-				}
-				else if(s == "start") {
-					if(sender.hasPermission("waterwars.commands.privategame.create")) {
-						WWCommandPrivateGame.start(sender, cmd, s, args);
-					} else sender.sendMessage("You don't have permission!"); return true;
-					
-				}
-				else if(s == "cancel") {
-					if(sender.hasPermission("waterwars.commands.privategame.create")) {
-						WWCommandPrivateGame.cancel(sender, cmd, s, args);
-					} else sender.sendMessage("You don't have permission!"); return true;
-					
-				}
-				else if(s == "join") {
-					if(sender.hasPermission("waterwars.commands.privategame.join")) {
-						WWCommandPrivateGame.join(sender, cmd, s, args);
-					} else sender.sendMessage("You don't have permission!"); return true;
-					
-				}
-			}
-		} else return true;
 		
 		sender.sendMessage("You don't have permission!");
 		return true;

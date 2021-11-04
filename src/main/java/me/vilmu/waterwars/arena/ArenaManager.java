@@ -80,6 +80,7 @@ public class ArenaManager {
 			Arena a = ArenaUtilities.getArenaWith(p);
 			if(a.isValid()) {
 				a.players.remove(p);
+				updateArena(a);
 			}
 		}
 		
@@ -380,5 +381,9 @@ public class ArenaManager {
 			
 		}, 5* 60* 20L);
 		
+	}
+
+	public static PrivateGame newPg(HashMap<String, Object> hm) {
+		return new PrivateGame(hm);
 	}
 } 

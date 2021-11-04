@@ -139,9 +139,28 @@ public class PlayerMessages {
 		}
 	}
 	public static void privateGameCreated(Player p, String joinKey) {
-		p.sendMessage(watermark + ChatColor.AQUA + "You are now hosting a private game! Anyone can now join using this command: " + ChatColor.GOLD + "/ww privategame join " + joinKey);
+		p.sendMessage(watermark + ChatColor.AQUA + "You are now hosting a private game! Anyone can now join using this command: " + ChatColor.GOLD + "/privategame join " + joinKey);
 	}
 	public static void privateGameFull(Player p) {
 		p.sendMessage(watermark + ChatColor.AQUA + "Unfortunately this private game is already full! Try again a bit later!");
+	}
+	public static void alreadyInPG(Player p) {
+		p.sendMessage(watermark + ChatColor.AQUA + "You have already joined to a private game!");
+	}
+	public static void alreadyHostingPG(Player p) {
+		p.sendMessage(watermark + ChatColor.AQUA + "You are already hosting a private game!");
+	}
+	public static void alreadyInGame(Player p) {
+		p.sendMessage(watermark + ChatColor.AQUA + "You are already in a game!");
+	}
+	public static void playerLeftGame(Player p, int place, int i, List<Player> players) {
+		p.sendMessage(watermark + ChatColor.AQUA + "You left! You placed " + place + "/" + i +" overall!");
+		for(Player p2 : players) {
+			if(p2 == p) continue;
+			p2.sendMessage(watermark + ChatColor.AQUA + p.getName() + " left! There are " + (place - 1) +" players left!");
+		}
+	}
+	public static void notEnoughPlayes(Player p) {
+		p.sendMessage(watermark + ChatColor.AQUA + "There are not enough players to start the private game!");
 	}
 }

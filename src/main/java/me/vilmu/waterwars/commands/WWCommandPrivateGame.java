@@ -3,16 +3,59 @@ package me.vilmu.waterwars.commands;
 import java.util.HashMap;
 
 import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import me.vilmu.waterwars.PlayerMessages;
+import me.vilmu.waterwars.Storage;
 import me.vilmu.waterwars.WaterWars;
+import me.vilmu.waterwars.arena.Arena;
 import me.vilmu.waterwars.arena.ArenaManager;
 import me.vilmu.waterwars.arena.ArenaUtilities;
 import me.vilmu.waterwars.arena.PrivateGame;
 
-public class WWCommandPrivateGame {
+public class WWCommandPrivateGame implements CommandExecutor {
+	
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+		if(args.length != 0) {
+			if(args.length >= 1) {
+				String s = args[0];
+				if(s.equalsIgnoreCase("create")) {
+					if(sender.hasPermission("waterwars.commands.privategame.host")) {
+						create(sender, cmd, s, args);
+						return true;
+					} else sender.sendMessage("You don't have permission!"); return true;
+					
+				}
+				else if(s.equalsIgnoreCase("start")) {
+					if(sender.hasPermission("waterwars.commands.privategame.host")) {
+						start(sender, cmd, s, args);
+						return true;
+					} else sender.sendMessage("You don't have permission!"); return true;
+					
+				}
+				else if(s.equalsIgnoreCase("cancel")) {
+					if(sender.hasPermission("waterwars.commands.privategame.host")) {
+						cancel(sender, cmd, s, args);
+						return true;
+					} else sender.sendMessage("You don't have permission!"); return true;
+					
+				}
+				else if(s.equalsIgnoreCase("join")) {
+					if(sender.hasPermission("waterwars.commands.privategame.join")) {
+						join(sender, cmd, s, args);
+						return true;
+					} else sender.sendMessage("You don't have permission!"); return true;
+					
+				}
+			} else return true;
+
+		} else return true;
+		
+		return true;
+	}
+	
 	public static void create(CommandSender sender, Command cmd, String label, String[] args) {
 		if(!(sender instanceof Player)){
 			// Console sent the command
@@ -21,12 +64,16 @@ public class WWCommandPrivateGame {
 		} else {
 			Player p = (Player) sender;
 			
+			if(ArenaUtilities.isPGOwner(p)) {
+				PlayerMessages.alreadyHostingPG(p);
+				return;
+			}
 			HashMap<String, Object> hm = new HashMap<String,Object>();
 			String joinKey = ArenaUtilities.getJoinKey();
 			hm.put("owner", p);
 			hm.put("joinKey", joinKey);
 			
-			PrivateGame pg = new PrivateGame(hm);
+			PrivateGame pg = ArenaManager.newPg(hm);
 			
 			ArenaManager.privateGames.add(pg);
 			
@@ -45,8 +92,11 @@ public class WWCommandPrivateGame {
 			PrivateGame pg = ArenaUtilities.getPrivateGameWith(p);
 			if(pg.isValid()) {
 				if(pg.getOwner() == p) {
-					
-					ArenaManager.startNewGame(pg);
+					if(pg.getPlayers().size() >= Storage.getMinPlayers()) {
+						ArenaManager.startNewGame(pg);
+					} else {
+						PlayerMessages.notEnoughPlayes(p);
+					}
 					
 				} else {
 					PlayerMessages.notHostingPrivateGame(p);
@@ -70,11 +120,8 @@ public class WWCommandPrivateGame {
 			PrivateGame pg = ArenaUtilities.getPrivateGameWith(p);
 			if(pg.isValid()) {
 				if(pg.getOwner() == p) {
-					
 					PlayerMessages.privateGameCancelled(pg);
 					ArenaManager.privateGames.remove(pg);
-					
-					
 				} else {
 					PlayerMessages.notHostingPrivateGame(p);
 				}
@@ -92,21 +139,39 @@ public class WWCommandPrivateGame {
 			return;
 		} else {
 			Player p = (Player) sender;
-			
-			String joinKey = args[2];
-			PrivateGame pg = ArenaUtilities.getPrivateGameWith(joinKey);
-			if(pg.isValid()) {
-				boolean joined = pg.addPlayer(p);
-				if(joined) {
-					
-					ArenaManager.updatePrivateGame(pg);
-					
-					PlayerMessages.joinedPrivateGame(p, pg.getOwner());
-				} else PlayerMessages.privateGameFull(p);
+			if(args.length >= 2) {
+				String joinKey = args[1];
+				PrivateGame pg = ArenaUtilities.getPrivateGameWith(joinKey);
 				
-			} else {
-				PlayerMessages.privateGameNotValid(p);
-			}
+				PrivateGame pg2 = ArenaUtilities.getPrivateGameWith(p);
+				if(pg2.isValid()) {
+					PlayerMessages.alreadyInPG(p);
+					return;
+				}
+				
+				if(pg.isValid()) {
+					
+					Arena a = ArenaUtilities.getArenaWith(p);
+					if(a.isValid() && a.getAlivePlayers().contains(p)) {
+						PlayerMessages.alreadyInGame(p);
+					} else {
+						if(a.isValid()) {
+							a.removePlayer(p);
+							ArenaManager.updateArena(a);
+						}
+						ArenaManager.queuedPlayers.remove(p);
+						PlayerMessages.removedFromQueue(p);
+						boolean joined = pg.addPlayer(p);
+						if(joined) {
+							ArenaManager.updatePrivateGame(pg);
+							PlayerMessages.joinedPrivateGame(p, pg.getOwner());
+						} else PlayerMessages.privateGameFull(p);
+					}
+
+					
+				} else PlayerMessages.privateGameNotValid(p);
+			} else PlayerMessages.privateGameNotValid(p);
+
 		}
 	}
 }

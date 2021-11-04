@@ -120,10 +120,8 @@ public class JoinMethods implements Listener{
     		} else {
     			ArenaUtilities.removePlayerFromPrivateGame(p);
     		}
+    	} else {
+        	ArenaUtilities.queuePlayer(p);
     	}
-    	
-    	ArenaUtilities.queuePlayer(p);
 	}
-	
-	
 }

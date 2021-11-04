@@ -23,6 +23,7 @@ import org.bukkit.scheduler.BukkitScheduler;
 import me.vilmu.waterwars.utilities.ConfigManager;
 import me.vilmu.waterwars.arena.ArenaUtilities;
 import me.vilmu.waterwars.commands.WWCommand;
+import me.vilmu.waterwars.commands.WWCommandPrivateGame;
 import me.vilmu.waterwars.events.handlers.PlayerStopSpectatingEventHandler;
 import me.vilmu.waterwars.events.listeners.ArenaStartEventListener;
 import me.vilmu.waterwars.events.listeners.ChatMessageListener;
@@ -69,6 +70,7 @@ public class WaterWars extends JavaPlugin {
 			
 		// Command classes ------------------------------------------------------
 			getCommand("ww").setExecutor(new WWCommand());
+			getCommand("pg").setExecutor(new WWCommandPrivateGame());
 
 
 
@@ -444,7 +446,7 @@ public class WaterWars extends JavaPlugin {
 	public static void commandErrorConsole(int i) {
 		switch (i) {
 		case 0:
-			sender.sendMessage("[WaterWars] ERROR: Seems like the sender has too little flesh around their bones. This command can't be executed from console!");
+			sender.sendMessage("[WaterWars] ERROR: Seems like you have little too little flesh around your metallic bones. This command can't be executed from console!");
 			
 		}
 	}

@@ -294,7 +294,7 @@ public class ArenaUtilities {
 
 	public static PrivateGame getPrivateGameWith(String joinKey) {
 		for (PrivateGame pg : ArenaManager.privateGames) {
-			if(pg.getJoinKey() == joinKey) {
+			if(pg.getJoinKey().equals(joinKey)) {
 				return pg;
 			}
 		}

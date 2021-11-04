@@ -10,15 +10,15 @@ import me.vilmu.waterwars.Storage;
 
 public class PrivateGame {
 	String joinKey;
-	static List<Player> players = new ArrayList<Player>();;
+	List<Player> players = new ArrayList<Player>();;
 	Player owner;
 	boolean isValid = false;
 	
-	public PrivateGame(HashMap<String, Object> m) {
-	  joinKey = (String) m.get("joinKey");
-	  players.add((Player) m.get("owner"));
-	  owner = (Player) m.get("owner");
-	  isValid = true;
+	PrivateGame(HashMap<String, Object> m) {
+	  this.joinKey = (String) m.get("joinKey");
+	  this.players.add((Player) m.get("owner"));
+	  this.owner = (Player) m.get("owner");
+	  this.isValid = true;
 	}
 	
 	PrivateGame(){}

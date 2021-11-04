@@ -8,28 +8,22 @@ api-version: 1.13
 commands:
  ww:
   description: Use WaterWars commands
-  permission: waterwars.commands.command
   aliases: waterwars
+ pg:
+  description: Use WaterWars private game commands
+  aliases: privategame
    
 permissions:   
  waterwars.*:
   children:
-   - waterwars.commands.*
-  
- waterwars.commands.*:
-  children:
-   - waterwars.commands.admin
-   - waterwars.commands.player
-   - waterwars.commands.privategame.*
- 
- waterwars.commands.player: true
- 
- waterwars.commands.privategame.*:
-  children:
-   - waterwars.commands.privategame.create
-   - waterwars.commands.privategame.join
-   
- waterwars.commands.privategame.join: true
+   - waterwars.commands.*:
+      children:
+       - waterwars.commands.admin: op
+       - waterwars.commands.player: true
+       - waterwars.commands.privategame.*:
+          children:
+           - waterwars.commands.privategame.host: op
+           - waterwars.commands.privategame.join: true
    
    
      

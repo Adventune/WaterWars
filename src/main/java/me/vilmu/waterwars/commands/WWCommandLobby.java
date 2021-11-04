@@ -29,6 +29,12 @@ public class WWCommandLobby {
 			if(a.isValid()) {
 				if(!a.getDeadPlayers().contains(p)) {
 					a.addDeadPlayer(p);
+					a.getWorld().strikeLightningEffect(p.getLocation());
+
+					int place = a.getAlivePlayers().size() + 1;
+					
+					PlayerMessages.playerLeftGame(p, place, a.getAlivePlayers().size() + a.getDeadPlayers().size(), a.getPlayers());
+					
 					ArenaManager.updateArena(a);
 				}
 			}
