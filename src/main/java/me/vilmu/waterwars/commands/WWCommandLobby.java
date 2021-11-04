@@ -27,7 +27,7 @@ public class WWCommandLobby {
 			Player p = (Player) sender;
 			Arena a = ArenaUtilities.getArenaWith(p);
 			if(a.isValid()) {
-				if(!a.getDeadPlayers().contains(p)) {
+				if(!a.getDeadPlayers().contains(p) && !a.hasStopped()) {
 					a.addDeadPlayer(p);
 					a.getWorld().strikeLightningEffect(p.getLocation());
 

@@ -2,6 +2,8 @@ package me.vilmu.waterwars.utilities;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Random;
 
 import org.bukkit.inventory.ItemStack;
@@ -48,5 +50,13 @@ public class Utils {
         }
         return angle;
     }
+	
+	public static double round(double value, int places) {
+	    if (places < 0) throw new IllegalArgumentException();
+
+	    BigDecimal bd = BigDecimal.valueOf(value);
+	    bd = bd.setScale(places, RoundingMode.HALF_UP);
+	    return bd.doubleValue();
+	}
     
 }

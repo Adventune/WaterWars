@@ -209,6 +209,7 @@ public class ArenaManager {
     		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20*15, 2, false, false));
     		p.getInventory().clear();
     		p.setHealth(20);
+    		p.setFoodLevel(20);
     		p.setGameMode(GameMode.SURVIVAL);
 		}
 	}

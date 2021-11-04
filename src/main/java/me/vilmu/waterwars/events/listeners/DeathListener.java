@@ -40,12 +40,8 @@ public class DeathListener implements Listener{
 						p.setHealth(20);
 						e.setCancelled(true);
 					}
-					
-					
 				}
 			}
-			
 		}
-
 	}
 }

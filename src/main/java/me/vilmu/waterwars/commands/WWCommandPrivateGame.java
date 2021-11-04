@@ -68,6 +68,14 @@ public class WWCommandPrivateGame implements CommandExecutor {
 				PlayerMessages.alreadyHostingPG(p);
 				return;
 			}
+			if(ArenaUtilities.getPrivateGameWith(p).isValid()) {
+				PlayerMessages.alreadyInPG(p);
+				return;
+			}
+			if(ArenaUtilities.getArenaWith(p).isValid()) {
+				PlayerMessages.alreadyInGame(p);
+				return;
+			}
 			HashMap<String, Object> hm = new HashMap<String,Object>();
 			String joinKey = ArenaUtilities.getJoinKey();
 			hm.put("owner", p);
@@ -159,8 +167,10 @@ public class WWCommandPrivateGame implements CommandExecutor {
 							a.removePlayer(p);
 							ArenaManager.updateArena(a);
 						}
-						ArenaManager.queuedPlayers.remove(p);
-						PlayerMessages.removedFromQueue(p);
+						if(ArenaManager.queuedPlayers.contains(p)) {
+							ArenaManager.queuedPlayers.remove(p);
+							PlayerMessages.removedFromQueue(p);
+						}
 						boolean joined = pg.addPlayer(p);
 						if(joined) {
 							ArenaManager.updatePrivateGame(pg);

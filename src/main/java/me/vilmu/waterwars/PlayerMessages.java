@@ -55,15 +55,19 @@ public class PlayerMessages {
 	}
 	
 	public static void killed(Player p, int place, int max, List<Player> players) {
-		p.sendMessage(watermark + ChatColor.AQUA + "You died! You placed " + place + "/" + max +" overall!");
+		p.sendMessage(watermark + ChatColor.GOLD + "You died! " + ChatColor.AQUA +"You placed " + ChatColor.GOLD + + place + "/" + max + ChatColor.AQUA +" overall!");
 		for(Player p2 : players) {
 			if(p2 == p) continue;
-			p2.sendMessage(watermark + ChatColor.AQUA + p.getName() + " died! There are " + (place - 1) +" players left!");
+			p2.sendMessage(watermark + ChatColor.GOLD + p.getName() + " died! " + ChatColor.AQUA +"There are "  + ChatColor.GOLD + (place - 1)  + ChatColor.AQUA +" players left!");
 		}
 	}
 	
+	public static void damaged (Player p, Player p2, double d) {
+		p.sendMessage(ChatColor.AQUA + "You hit " + ChatColor.GREEN+ p2.getName() +"! " + ChatColor.GOLD + d);
+	}
+	
 	public static void backHome(Player p) {
-		p.sendMessage(watermark + ChatColor.AQUA + "Use command: " + ChatColor.WHITE + "/ww lobby" + ChatColor.AQUA +" to get back to lobby!");
+		p.sendMessage(watermark + ChatColor.AQUA + "Use command: " + ChatColor.GOLD + "/ww lobby" + ChatColor.AQUA +" to get back to lobby!");
 	}
 	public static void whoosh(Player p) {
 		p.sendMessage(watermark + ChatColor.AQUA + "Whoooosh! You were teleported!");
@@ -124,7 +128,7 @@ public class PlayerMessages {
 		p.sendMessage(watermark + ChatColor.AQUA + "This private game does not exist!");
 	}
 	public static void joinedPrivateGame(Player p, Player p2) {
-		p.sendMessage(watermark + ChatColor.AQUA + "You have been added to a private game hosted by: " + p2.getName() +"!");
+		p.sendMessage(watermark + ChatColor.AQUA + "You have been added to a private game hosted by: "+ ChatColor.GOLD + p2.getName() +"!");
 		p.sendMessage(ChatColor.GRAY + "To leave right click the queue item!");
 	}
 	public static void cantUseAsPGOwner(Player p) {
