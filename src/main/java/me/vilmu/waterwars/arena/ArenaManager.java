@@ -176,42 +176,51 @@ public class ArenaManager {
 	}
 	
 	private static void teleportPlayersToSpawn(int id) {
-		List<Player> players = new ArrayList<Player>();
-		
 		Arena arena = ArenaUtilities.getArenaWith(id);
-		players = arena.getPlayers();
+		final List<Player> players = arena.getPlayers();
+		
 		List<Location> locs = Storage.getSpawnLoc();
 		Location center = Storage.getArenaCenter();
 		
 		if(locs.size() < players.size()) {
 			abortNewGame(arena, "There are not enough spawning spaces! Spawning spaces in config: " + locs.size() + "! Maximum players in config: " + Storage.getMaxPlayers() + "!");
 			for(Player p : players) {
-				p.teleport(Bukkit.getWorlds().get(0).getSpawnLocation());
+				p.teleport(Storage.getLobby().getSpawnLocation());
 			}
 			return;
 		}
-		for(Player p : players) {
-			int i = rand.nextInt(locs.size());
-			Location loc = locs.get(i);
-			locs.remove(loc);
-			
-			loc.setYaw(Utils.getAngle(new Vector(loc.getBlockX(), 0, loc.getBlockZ()), center.toVector()));
-			loc.setWorld(p.getWorld());
-			loc.add(0.5, 0, 0.5);
-			
-			p.teleport(loc);
-			p.setFlying(false);
-			PlayerMessages.teleportedToArena(p);
 
-			for(PotionEffect ef : p.getActivePotionEffects()) {
-				p.removePotionEffect(ef.getType());
+		scheduler.scheduleSyncDelayedTask(WaterWars.getInstance(), new Runnable() {
+
+			@Override
+			public void run() {
+				for(Player p : players) {
+					int i = rand.nextInt(locs.size());
+					Location loc = locs.get(i);
+					locs.remove(loc);
+					
+					loc.setYaw(Utils.getAngle(new Vector(loc.getBlockX(), 0, loc.getBlockZ()), center.toVector()));
+					loc.setWorld(p.getWorld());
+					loc.add(0.5, 0, 0.5);
+					
+					p.teleport(loc);
+					p.setFlying(false);
+					PlayerMessages.teleportedToArena(p);
+
+					for(PotionEffect ef : p.getActivePotionEffects()) {
+						p.removePotionEffect(ef.getType());
+					}
+		    		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20*15, 2, false, false));
+		    		p.getInventory().clear();
+		    		p.setHealth(20);
+		    		p.setFoodLevel(20);
+		    		p.setGameMode(GameMode.SURVIVAL);
+				}
 			}
-    		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20*15, 2, false, false));
-    		p.getInventory().clear();
-    		p.setHealth(20);
-    		p.setFoodLevel(20);
-    		p.setGameMode(GameMode.SURVIVAL);
-		}
+			
+			
+		}, 3* 20L);
+
 	}
 	
 	public static int countdown = 10;
